@@ -30,13 +30,13 @@ jobs:
 
     - name: Start ShopApp Spring Container
       run: | 
-        docker-compose -f deployment.yml up -d shopapp-spring-container --build
+        docker-compose -f deployment.yml up -d --build shopapp-spring-container
         docker tag shopapp-spring:1.0.0 ${{ secrets.DOCKERHUB_USERNAME }}/shopapp-spring:latest
         docker push ${{ secrets.DOCKERHUB_USERNAME }}/shopapp-spring:latest
 
     - name: Start ShopApp Angular Container
       run: | 
-        docker-compose -f ./deployment.yml up -d shopapp-angular-container --build
+        docker-compose -f ./deployment.yml up -d --build shopapp-angular-container
         docker tag shopapp-angular:1.0.0 ${{ secrets.DOCKERHUB_USERNAME }}/shopapp-angular:latest
         docker push ${{ secrets.DOCKERHUB_USERNAME }}/shopapp-angular:latest
 
