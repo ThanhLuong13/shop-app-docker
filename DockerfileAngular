@@ -1,0 +1,36 @@
+# image
+FROM node:20-alpine3.17 AS builder
+
+# Set working directory
+WORKDIR /app
+
+# Copy package.json and package-lock.json
+COPY ./shopapp-angular/package.json package.json
+COPY ./shopapp-angular/package-lock.json package-lock.json
+
+# install
+RUN npm install --frozen-lockfile
+
+# Copy the rest of the app's code excluding node_modules
+COPY ./shopapp-angular/ .
+
+# Build Angular app in production mode
+RUN npm run build:production
+
+# Production-ready image
+FROM nginx:alpine
+
+# Cory the built app from the builder stage
+COPY --from=builder app/dist/shopapp-angular /usr/share/nginx/html
+
+EXPOSE 80
+
+# Start nginx
+CMD ["nginx", "-g", "daemon off;"]
+# docker build -t shopapp-angular:1.0.0 -f DockerfileAngular .
+
+
+
+
+
+

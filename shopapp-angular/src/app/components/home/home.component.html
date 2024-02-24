@@ -1,0 +1,92 @@
+<app-header></app-header>
+
+<!-- Header-->
+<header class="bg-dark py-5">
+  <div class="container px-4 px-lg-5 my-5">
+    <div class="text-center text-white">
+      <h1 class="display-4 fw-bolder">Shop in style</h1>
+      <p class="lead fw-normal text-white-50 mb-0">With this shop hompeage template</p>
+    </div>
+  </div>
+</header>
+
+<!--Content-->
+<section class="py-5">
+  <div class="container px-4 px-lg-5 mt-5">
+    <div class="intro-section">
+      <div class="search-box pb-5">
+        <select class="form-control product-category" [(ngModel)]="selectedCategoryId">
+          <option [value]="0">Tất cả</option>
+          <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
+        </select>
+        <input type="search" class="search-input form-control mr-sm-2" [(ngModel)]="keyword"
+          placeholder="Find your product">
+        <div class="space-x">
+          <button type="button" class="btn btn-outline-success my-2 my-sm-0" (click)="searchProducts()"><i
+              class="fas fa-search"></i></button>
+        </div>
+
+      </div>
+      <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+        <div class="col mb-5" *ngFor="let product of products">
+          <div class="card h-100">
+            <a (click)="onProductClick(product.id)"><img style="cursor: pointer;" [src]="product.url"
+                alt="Product image" class="card-img-top"></a>
+            <div class="card-body p-4">
+              <a (click)="onProductClick(product.id)" style="cursor: pointer;">
+                <div class="text-center">
+                  <!-- Product name-->
+                  <h5 class="fw-bolder">{{product.name}}</h5>
+                </div>
+              </a>
+              <!-- Product description-->
+              <p class="text-center">{{truncateDescription(product.description, 40)}}</p>
+              <!-- Product price-->
+              <p class="text-center">Giá: {{product.price}}&#273;</p>
+              <div class="d-flex justify-content-center small text-warning mb-2">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+              </div>
+            </div>
+            <!-- Product actions-->
+            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+              <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Thêm vào giỏ hàng</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pagination -->
+    <div class="d-flex justify-content-center">
+      <nav aria-label="Page navigation">
+        <ul class="pagination">
+          <li class="page-item" *ngIf="currentPage > 1">
+            <a class="page-link" (click)="onPageChange(1)">First</a>
+          </li>
+          <li class="page-item" *ngIf="currentPage > 1">
+            <a class="page-link" (click)="onPageChange(currentPage - 1)">Previous</a>
+          </li>
+          <ng-container *ngFor="let page of visiblePages">
+            <li class="page-item" [ngClass]="{'active': page === currentPage}">
+              <a class="page-link" (click)="onPageChange(page)">{{page}}</a>
+            </li>
+          </ng-container>
+          <li class="page-item" *ngIf="currentPage < totalPages">
+            <a class="page-link" (click)="onPageChange(currentPage + 1)">Next</a>
+          </li>
+          <li class="page-item" *ngIf="currentPage < totalPages">
+            <a class="page-link" (click)="onPageChange(totalPages)">Last</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</section>
+<!--End-Content-->
+
+<app-footer></app-footer>

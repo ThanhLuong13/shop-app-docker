@@ -1,0 +1,96 @@
+<h1 class="h3 mb-2 text-gray-800">Danh mục đơn hàng</h1>
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary">Danh sách các đơn hàng</h6>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <div class="d-flex pb-3">
+        <input type="search" class="search-input form-control form-control" [(ngModel)]="keyword"
+          placeholder="Nhập tên hoặc số điện thoại">
+
+        <button type="button" class="btn btn-success ml-2" (click)="searchOrder()">
+          <i class="fas fa-search"></i>
+        </button>
+
+      </div>
+      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+          <tr>
+            <th>Họ tên</th>
+            <th>Email</th>
+            <th>Số điện thoại</th>
+            <th>Ghi chú</th>
+            <th>Ngày đặt hàng</th>
+            <th>Trạng thái</th>
+            <th>Tổng số tiền</th>
+            <th>Phương thức vận chuyển</th>
+            <th>Địa chỉ nhận hàng</th>
+            <th>Phương thức nhận hàng</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tfoot>
+          <tr>
+            <th>Họ tên</th>
+            <th>Email</th>
+            <th>Số điện thoại</th>
+            <th>Ghi chú</th>
+            <th>Ngày đặt hàng</th>
+            <th>Trạng thái</th>
+            <th>Tổng số tiền</th>
+            <th>Phương thức vận chuyển</th>
+            <th>Địa chỉ nhận hàng</th>
+            <th>Phương thức nhận hàng</th>
+            <th></th>
+          </tr>
+        </tfoot>
+        <tbody>
+          <ng-container *ngFor="let order of orders">
+            <tr>
+              <td>{{order.fullname}}</td>
+              <td>{{order.email}}</td>
+              <td>{{order.phone_number}}</td>
+              <td>{{order.note}}</td>
+              <td>{{formatDate(order.order_date)}}</td>
+              <td>{{order.status}}</td>
+              <td>{{order.total_price}}</td>
+              <td>{{order.shipping_method}}</td>
+              <td>{{order.shipping_address}}</td>
+              <td>{{order.payment_method}}</td>
+              <td>
+                <a class="btn btn-danger" (click)="deleteOrder(order.id)">Xoá</a>
+                <a class="btn btn-success" (click)="getOrderDetails(order.id)">Chi tiết</a>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Pagination -->
+  <div class="d-flex justify-content-center">
+    <nav aria-label="Page navigation">
+      <ul class="pagination">
+        <li class="page-item" *ngIf="currentPage > 1">
+          <a class="page-link" (click)="onPageChange(1)">First</a>
+        </li>
+        <li class="page-item" *ngIf="currentPage > 1">
+          <a class="page-link" (click)="onPageChange(currentPage - 1)">Previous</a>
+        </li>
+        <ng-container *ngFor="let page of visiblePages">
+          <li class="page-item" [ngClass]="{'active': page === currentPage}">
+            <a class="page-link" (click)="onPageChange(page)">{{page}}</a>
+          </li>
+        </ng-container>
+        <li class="page-item" *ngIf="currentPage < totalPages">
+          <a class="page-link" (click)="onPageChange(currentPage + 1)">Next</a>
+        </li>
+        <li class="page-item" *ngIf="currentPage < totalPages">
+          <a class="page-link" (click)="onPageChange(totalPages)">Last</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>

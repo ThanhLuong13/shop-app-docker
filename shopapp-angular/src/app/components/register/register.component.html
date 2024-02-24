@@ -1,0 +1,114 @@
+<body class="bg-gradient-primary">
+
+  <div class="container">
+
+
+    <div class="card o-hidden border-0 shadow-lg my-5">
+      <div class="card-body p-0">
+
+        <!-- Nested Row within Card Body -->
+        <div class="row">
+          <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+          <div class="col-lg-7">
+            <div class="p-5">
+
+              <div class="text-center">
+                <h1 class="h4 text-gray-900 mb-4">Tạo tài khoản</h1>
+              </div>
+
+              <form class="user" #registerForm="ngForm">
+                <div class="form-group row">
+
+                  <div class="col-sm-6 mb-3 mb-sm-0">
+                    <input type="text" class="form-control form-control-user" [(ngModel)]="fullName" name="fullName"
+                      id="full-name" placeholder="Họ và tên">
+                    <!-- <div class="divider-nospace"></div> -->
+                  </div>
+
+                  <div class="form-group">
+                    <input type="date" class="form-control form-control-user" [(ngModel)]="dateOfBirth"
+                      name="dateOfBirth" id="date-of-birth" placeholder="Ngày sinh">
+                    <!-- <div class="divider-nospace"></div> -->
+                  </div>
+
+
+                </div>
+
+
+                <div class="form-group">
+                  <input type="tel" class="form-control form-control-user" [(ngModel)]="phoneNumber"
+                    (input)="onPhoneNumberChange()" name="phoneNumber" (focus)="registerForm.form.markAsTouched"
+                    placeholder="Số điện thoại" id="phone" autofocus>
+                  <!-- <div class="divider-nospace"></div> -->
+                  <p class="text-danger" *ngIf="phoneNumber.length < 6 && registerForm.form.touched">
+                    Số điện thoại không hợp lệ
+                  </p>
+                </div>
+
+                <div class="form-group row">
+                  <div class="col-sm-6 mb-3 mb-sm-0">
+                    <input type="password" class="form-control form-control-user" [(ngModel)]="password" name="password"
+                      id="password" placeholder="Mật khẩu (Mật khẩu phải hơn 6 kí tự)">
+                    <!-- <i class="password-toggle fas fa-eye-slash"></i> -->
+                    <div class="divider-nospace"></div>
+                    <p class="text-danger" *ngIf="password.length < 6 && registerForm.form.touched">
+                      Mật khẩu không hợp lệ
+                    </p>
+                  </div>
+
+                  <div class="col-sm-6 mb-3 mb-sm-0">
+                    <input type="password" class="form-control form-control-user" [(ngModel)]="retypePassword"
+                      (input)="registerForm.form.markAsTouched; checkPasswordMatch()" name="retypePassword"
+                      id="retype-password" placeholder="Confirm Password">
+                    <!-- <i class="password-toggle fas fa-eye-slash"></i> -->
+                    <!-- <div class="divider-nospace"></div> -->
+                    <p class="text-danger" *ngIf="retypePassword.length < 6 && registerForm.form.touched">
+                      Nhập lại mật khẩu không hợp lệ
+                    </p>
+                    <p class="text-danger"
+                      *ngIf="registerForm.controls['retypePassword'].hasError('passwordNotMatch') && registerForm.form.touched">
+                      Nhập lại mật khẩu chưa chính xác
+                    </p>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <input type="text" class="form-control form-control-user" [(ngModel)]="address" name="address"
+                    id="address" placeholder="Địa chỉ">
+                  <!-- <div class="divider-nospace"></div> -->
+                </div>
+                <div class="form-group">
+                  <div class="form-check checkbox-text">
+                    <span style="display: flex;">
+                      <input type="checkbox" class="form-check-input" [(ngModel)]="isAccept" id="agree">
+                      <label class="form-check-label text-start" for="agree">
+                        Đồng ý với các điều khoản</label>
+                    </span>
+                  </div>
+                </div>
+                <button type="button" class="btn btn-primary btn-user btn-block" (click)="register()">Đăng kí tài
+                  khoản</button>
+
+              </form>
+              <hr>
+              <div class="text-center">
+                <a class="small">Quên mật khẩu</a>
+              </div>
+              <div class="text-center">
+                <a class="small" routerLink="/login">Bạn đã có tài khoản? Đăng nhập!</a>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+
+  </div>
+
+</body>
+<!-- <app-footer></app-footer> -->

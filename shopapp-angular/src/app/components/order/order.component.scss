@@ -1,0 +1,73 @@
+.intro-section {
+  text-align: center;
+  color: black;
+  padding: 20px;
+}
+
+.container {
+  color: black;
+}
+
+.product-header {
+  color: rgb(233, 66, 176);
+}
+
+.form-control {
+  background-color: white;
+  border: 1px solid rgb(29, 33, 54);
+  color: black;
+  width: 400px;
+}
+
+.form-control:focus {
+  border-color: white;
+  background-color: white;
+}
+
+.form-label {
+  color: black;
+}
+
+.product-order {
+  color: rgb(149, 212, 196);
+}
+
+table {
+  width: 100%;
+  border-radius: 10px;
+  border-collapse: separate;
+  border: 1px solid black;
+  border-spacing: 0;
+  background-color: white;
+}
+
+th,
+td {
+  padding: 10px;
+  text-align: center;
+}
+
+.product-info {
+  display: flex;
+  align-items: center;
+}
+
+.product-image {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.product-name {
+  color: black;
+  margin-right: 10px;
+}
+
+.btn-gradient {
+  background: linear-gradient(to right, rgb(255, 64, 180), rgb(126, 42, 237));
+  color: black;
+  border-radius: 30px;
+  width: 200px;
+}

@@ -1,0 +1,10 @@
+# Angular
+
+**/node_modules
+
+# Java Spring
+
+*.class
+*.jar
+*.war
+*.ear 
