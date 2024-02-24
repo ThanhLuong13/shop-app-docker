@@ -21,8 +21,22 @@ jobs:
         
     - name: Log in to Docker Hub
       run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
-        
-    - name: Build and Push Docker images
-      run: |
-        docker-compose -f deployment.yml build
-        docker-compose -f deployment.yml push
+
+    - name: Start MySQL Container
+      run: docker-compose -f deployment.yml up -d mysql8-container
+
+    - name: Start PhpMyAdmin Container
+      run: docker-compose -f deployment.yml up -d phpmyadmin8-container
+
+    - name: Start ShopApp Spring Container
+      run: | 
+        docker-compose -f deployment.yml up -d shopapp-spring-container --build
+        docker tag shopapp-spring:1.0.0 ${{ secrets.DOCKERHUB_USERNAME }}/shopapp-spring:latest
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/shopapp-spring:latest
+
+    - name: Start ShopApp Angular Container
+      run: | 
+        docker-compose -f ./deployment.yml up -d shopapp-angular-container --build
+        docker tag shopapp-angular:1.0.0 ${{ secrets.DOCKERHUB_USERNAME }}/shopapp-angular:latest
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/shopapp-angular:latest
+
