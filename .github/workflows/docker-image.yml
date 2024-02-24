@@ -29,10 +29,6 @@ jobs:
     - name: Start PhpMyAdmin Container
       run: docker-compose -f deployment.yml up -d phpmyadmin8-container
 
-    - name: Push Custom Images to Docker Hub
-      run: |
-        docker push mysql:8.2.0
-        docker push phpmyadmin/phpmyadmin
 
     - name: Start ShopApp Spring Container
       run: | 
